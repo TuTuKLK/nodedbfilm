@@ -21,4 +21,16 @@ const routes = require('./routes/routes.js')(app, fs);
 // finally, launch our server on port 3001.
 const server = app.listen(3001, () => {
 console.log('listening on port %s...', server.address().port);
+//requete
+async()=> {
+    try {
+        const request = dbConnect.request();
+        const result = await request.query('select * from Cast where idcast = 1');
+        console.log(result)
+        return result
+    } catch (err){
+        console.error('SQL error',err)
+    }
+}
+
 });
