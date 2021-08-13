@@ -2,9 +2,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 var dbConnect = require("./dbConnect")
+const cors = require('cors')
 
 // create an instance of express to serve our end points
 const app = express();
+app.use(cors())
 
 // we'll load up node's built in file system helper library here
 // (we'll be using this later to serve our JSON files
