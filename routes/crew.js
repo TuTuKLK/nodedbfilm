@@ -1,9 +1,9 @@
 const sql = require('mssql/msnodesqlv8');
 const dbConnect = require('../dbConnect');
-const genderRoutes = (app, fs) => {
-    app.get('/staff', (req, res) => {
+const crewRoutes = (app, fs) => {
+    app.get('/crew', (req, res) => {
         let request = new sql.Request(dbConnect);
-        request.query('select * from [crew]', function(err,result){
+        request.query('SELECT c.IdCrew, IdMovie,FirstName,LastName,Job FROM [Crew] AS c RIGHT OUTER JOIN [CrewMovie] AS cm on c.IdCrew = cm.IdCrew  ', function(err,result){
             if (err){
                 console.log(err);
             }else{
@@ -12,4 +12,4 @@ const genderRoutes = (app, fs) => {
         })
     });
 };
-    module.exports = genderRoutes;
+    module.exports = crewRoutes;

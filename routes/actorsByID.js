@@ -1,9 +1,9 @@
 const sql = require('mssql/msnodesqlv8');
 const dbConnect = require('../dbConnect');
-const actorRoutes = (app, fs) => {
-    app.get('/actors', (req, res) => {
+const actorByIDRoutes = (app, fs) => {
+    app.get('/actorsByID', (req, res) => {
         let request = new sql.Request(dbConnect);
-        req=request.query('SELECT * from [Cast] order by FirstName', function(err,result){
+        req=request.query('SELECT c.IdCast,mc.idMovie,FirstName,LastName FROM [Cast] AS c INNER JOIN [MovieCast] AS mc on c.IdCast = mc.IdCast', function(err,result){
             if (err){
                 console.log(err);
             }else{
@@ -14,4 +14,4 @@ const actorRoutes = (app, fs) => {
     });
 };
     
-    module.exports = actorRoutes;
+    module.exports = actorByIDRoutes;

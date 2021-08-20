@@ -1,9 +1,9 @@
 const sql = require('mssql/msnodesqlv8');
 const dbConnect = require('../dbConnect');
-const genderRoutes = (app, fs) => {
-    app.get('/genders', (req, res) => {
+const genreIDRoutes = (app, fs) => {
+    app.get('/genresID', (req, res) => {
         let request = new sql.Request(dbConnect);
-        request.query('select * from [genre]', function(err,result){
+        request.query('SELECT IdMovie, g.IdGenre, Label FROM [MovieGenre] AS mg INNER JOIN [Genre] AS g on mg.IdGenre = g.IdGenre', function(err,result){
             if (err){
                 console.log(err);
             }else{
@@ -12,4 +12,4 @@ const genderRoutes = (app, fs) => {
         })
     });
 };
-    module.exports = genderRoutes;
+    module.exports = genreIDRoutes;
